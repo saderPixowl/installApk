@@ -1,10 +1,21 @@
 import subprocess
 import os
 import time
+import sys
 
+if (len(sys.argv) < 2):
+    print ("Error: wrong number of paramters")
+    print ("Usage: 'python adbCommands.py package_name path_to_file'")
+    sys.exit(-1)
+        
+else:
+    PACKAGE_NAME = sys.argv[1]
+    APK_NAME = sys.argv[2]
+    
+    
 def run_command(command):
     print ("run command adb " + command + "\noutput:")
-    p = subprocess.Popen((ADB_PATH + command).split(),
+    p = subprocess.Popen(("adb " + command).split(),
                          stdout=subprocess.PIPE,
                          stderr=subprocess.STDOUT)
     for line in iter(p.stdout.readline, b''):
@@ -13,14 +24,13 @@ def run_command(command):
     print ("end command output ")
 
 
-ADB_PATH = "adb "
-PACKAGE_NAME = "com.activision.peanuts"
-APK_PATH = "/Users/alejandro/Downloads/"
-APK_NAME = "Peanuts-499-qa-googleplay-v7a-activision-release.apk"
+
+#PACKAGE_NAME = "com.activision.peanuts"
+#APK_NAME = "temp.apk"
 
 commandDevices = "devices"
 commandUnistall = "uninstall " + PACKAGE_NAME
-commandInstall = "install " + APK_PATH + APK_NAME
+commandInstall = "install " + APK_NAME
 commandPlay = "shell monkey -p " + PACKAGE_NAME + " -c android.intent.category.LAUNCHER 1"
 commandStop = "shell am force-stop " + PACKAGE_NAME
 
