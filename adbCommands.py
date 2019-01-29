@@ -36,9 +36,10 @@ commandStop = "shell am force-stop " + PACKAGE_NAME
 
 minToSleep = 1/20
 iterations = 4
+
 run_command(commandStop)
-#run_command(commandUnistall)
-#run_command(commandInstall)
+run_command(commandUnistall)
+run_command(commandInstall)
 
    
 for i in range(iterations):
