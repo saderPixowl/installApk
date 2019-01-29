@@ -13,7 +13,7 @@ def run_command(command):
     print ("end command output ")
 
 
-ADB_PATH = "/Users/alejandro/Library/Android/sdk/platform-tools/adb "
+ADB_PATH = "adb "
 PACKAGE_NAME = "com.activision.peanuts"
 APK_PATH = "/Users/alejandro/Downloads/"
 APK_NAME = "Peanuts-499-qa-googleplay-v7a-activision-release.apk"
