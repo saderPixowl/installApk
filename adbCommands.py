@@ -36,9 +36,11 @@ commandStop = "shell am force-stop " + PACKAGE_NAME
 
 minToSleep = 1/20
 iterations = 4
-
+print ("step 01")
 run_command(commandStop)
+print ("step 02")
 run_command(commandUnistall)
+print ("step 03")
 run_command(commandInstall)
 
    
