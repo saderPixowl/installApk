@@ -6,8 +6,7 @@ import sys
 if (len(sys.argv) < 2):
     print ("Error: wrong number of paramters")
     print ("Usage: 'python adbCommands.py package_name path_to_file'")
-    sys.exit(-1)
-        
+    sys.exit(-1) 
 else:
     PACKAGE_NAME = sys.argv[1]
     APK_NAME = sys.argv[2]
@@ -34,20 +33,20 @@ commandInstall = "install " + APK_NAME
 commandPlay = "shell monkey -p " + PACKAGE_NAME + " -c android.intent.category.LAUNCHER 1"
 commandStop = "shell am force-stop " + PACKAGE_NAME
 
-minToSleep = 1/20
-iterations = 4
+#minToSleep = 1/20
+#iterations = 4
 print ("step 01")
-run_command(commandStop)
-print ("step 02")
-run_command(commandUnistall)
-print ("step 03")
-run_command(commandInstall)
+#run_command(commandStop)
+#print ("step 02")
+#run_command(commandUnistall)
+#print ("step 03")
+#run_command(commandInstall)
 
    
-for i in range(iterations):
-    run_command(commandPlay)
-    time.sleep(minToSleep * 60.0)
-    run_command(commandStop)
+#for i in range(iterations):
+#    run_command(commandPlay)
+#    time.sleep(minToSleep * 60.0)
+#    run_command(commandStop)
 
 print ("END adbCommand.py")
 
