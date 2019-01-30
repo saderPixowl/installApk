@@ -13,13 +13,12 @@ else:
     
     
 def run_command(command):
-    print ("run command adb " + command + "\noutput:")
-    p = subprocess.Popen(("adb " + command).split(),
+    print ("run command " + command + "\noutput:")
+    p = subprocess.Popen((command).split(),
                          stdout=subprocess.PIPE,
                          stderr=subprocess.STDOUT)
     for line in iter(p.stdout.readline, b''):
         print(line.decode('utf-8'))
-
     print ("end command output ")
 
 
@@ -27,18 +26,18 @@ def run_command(command):
 #PACKAGE_NAME = "com.activision.peanuts"
 #APK_NAME = "temp.apk"
 
-commandDevices = "devices"
-commandUnistall = "uninstall " + PACKAGE_NAME
-commandInstall = "install " + APK_NAME
-commandPlay = "shell monkey -p " + PACKAGE_NAME + " -c android.intent.category.LAUNCHER 1"
-commandStop = "shell am force-stop " + PACKAGE_NAME
+commandDevices = "adb devices"
+commandUnistall = "adb uninstall " + PACKAGE_NAME
+commandInstall = "adb install " + APK_NAME
+commandPlay = "adb shell monkey -p " + PACKAGE_NAME + " -c android.intent.category.LAUNCHER 1"
+commandStop = "adb shell am force-stop " + PACKAGE_NAME
 
 #minToSleep = 1/20
 #iterations = 4
 print ("step 01")
 #run_command(commandStop)
 print ("step 02")
-run_command(commandUnistall)
+#run_command(commandUnistall)
 print ("step 03")
 run_command(commandInstall)
 
