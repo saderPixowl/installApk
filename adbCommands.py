@@ -11,8 +11,8 @@ else:
     PACKAGE_NAME = sys.argv[1]
     APK_NAME = sys.argv[2]
     MIN_FIRST_LAUNCH = float(sys.argv[3])
-    MIN_FOR_LAUNCH = float(sys.argv[3])
-    ITERATIONS = int(sys.argv[4])
+    MIN_FOR_LAUNCH = float(sys.argv[4])
+    ITERATIONS = int(sys.argv[5])
 
     
     
@@ -26,8 +26,6 @@ def run_command(command):
 
     print ("end command output ")
 
-#PACKAGE_NAME = "com.activision.peanuts"
-#APK_NAME = "temp.apk"
 
 commandDevices = "devices"
 commandUnistall = "uninstall " + PACKAGE_NAME
@@ -35,8 +33,11 @@ commandInstall = "install " + APK_NAME
 commandPlay = "shell monkey -p " + PACKAGE_NAME + " -c android.intent.category.LAUNCHER 1"
 commandStop = "shell am force-stop " + PACKAGE_NAME
 
+
 #run_command(commandStop)
 #run_command(commandUnistall)
+
+#don't work on jenkins
 #run_command(commandInstall)
 
 run_command(commandPlay)
