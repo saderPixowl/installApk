@@ -3,49 +3,53 @@ import os
 import time
 import sys
 
-if (len(sys.argv) < 2):
+if (len(sys.argv) < 5):
     print ("Error: wrong number of paramters")
-    print ("Usage: 'python adbCommands.py package_name path_to_file'")
+    print ("Usage: 'python adbCommands.py package_name path_to_file minutes_first_launch minutes_for_launch(flaot) iterations(int)'")
     sys.exit(-1) 
 else:
     PACKAGE_NAME = sys.argv[1]
     APK_NAME = sys.argv[2]
+    MIN_FIRST_LAUNCH = float(sys.argv[3])
+    MIN_FOR_LAUNCH = float(sys.argv[3])
+    ITERATIONS = int(sys.argv[4])
+
     
     
 def run_command(command):
-    print ("run command " + command + "\noutput:")
-    p = subprocess.Popen((command).split(),
+    print ("run command adb " + command + "\noutput:")
+    p = subprocess.Popen(("adb " + command).split(),
                          stdout=subprocess.PIPE,
                          stderr=subprocess.STDOUT)
     for line in iter(p.stdout.readline, b''):
         print(line.decode('utf-8'))
+
     print ("end command output ")
-
-
 
 #PACKAGE_NAME = "com.activision.peanuts"
 #APK_NAME = "temp.apk"
 
-commandDevices = "adb devices"
-commandUnistall = "adb uninstall " + PACKAGE_NAME
-commandInstall = "adb install " + APK_NAME
-commandPlay = "adb shell monkey -p " + PACKAGE_NAME + " -c android.intent.category.LAUNCHER 1"
-commandStop = "adb shell am force-stop " + PACKAGE_NAME
+commandDevices = "devices"
+commandUnistall = "uninstall " + PACKAGE_NAME
+commandInstall = "install " + APK_NAME
+commandPlay = "shell monkey -p " + PACKAGE_NAME + " -c android.intent.category.LAUNCHER 1"
+commandStop = "shell am force-stop " + PACKAGE_NAME
 
-#minToSleep = 1/20
-#iterations = 4
-print ("step 01")
 #run_command(commandStop)
-print ("step 02")
 #run_command(commandUnistall)
-print ("step 03")
-run_command(commandInstall)
+#run_command(commandInstall)
+
+run_command(commandPlay)
+print ("sleep for " + str(MIN_FIRST_LAUNCH * 60.0))
+time.sleep(MIN_FIRST_LAUNCH * 60.0)
+run_command(commandStop)
 
    
-#for i in range(iterations):
-#    run_command(commandPlay)
-#    time.sleep(minToSleep * 60.0)
-#    run_command(commandStop)
+for i in range(ITERATIONS-1):
+    run_command(commandPlay)
+    print ("sleep for " + str(MIN_FOR_LAUNCH * 60.0))
+    time.sleep(MIN_FOR_LAUNCH * 60.0)
+    run_command(commandStop)
 
 print ("END adbCommand.py")
 
